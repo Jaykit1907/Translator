@@ -1,0 +1,33 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+.form-parent{
+    display:flex;
+    justify-content: center;
+
+}
+form{
+    display:flex;
+    flex-direction:column;
+    height:400px;
+    width:600px;
+    background-color: gray;
+}
+.form-container{
+    display:flex;
+    flex-direction: row;
+    height:100%;
+    width:100%;
+}
+
+.form-divide{
+    width:50%;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+    justify-content: center;
+}
+

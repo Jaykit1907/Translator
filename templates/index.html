@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css">
+   
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+                        <ul>
+                            <li><a href="{% url 'home' %}">home</a></li>
+                            <li><a href="{% url 'speak' %}">speak</a></li>
+                            <li><a href="{% url 'signup' %}">signup</a></li>
+                            <li><a href="{% url 'login' %}">login</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section class="formsection">
+   
+    <form method="POST">
+        {% csrf_token %}
+        <input type="textarea" name="textarea1" placeholder="enter the text" value="{{text1}}" required>
+       
+
+        <select name="selected_language">
+            {% for code, name in language.items %}
+            <option value="{{code}}" >{{name}}</option>
+            {% endfor %}
+        
+        </select>
+        <input type="textarea" name="textarea2" value="{{final_result}}" id="text2">
+
+        <div id="btn">
+        <button type="submit" name="resultbtn" value="btn1" id="btn1">Translate</button>
+        <button type="submit" name='speakbtn' value="btn2" id="btn2">Speak</button>
+        </div>
+    </form>
+    </section>
+</body>
+<script src="/static/script.js"></script>
+</html>

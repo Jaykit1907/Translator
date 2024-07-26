@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>translator</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+   
+</head>
+<body>
+
+    <nav>
+        <div id="nav-container">
+                        <ul>
+                            <li><a href="{% url 'home' %}">home</a></li>
+                            <li><a href="{% url 'speak' %}">speak</a></li>
+                            <li><a href="{% url 'signup' %}">signup</a></li>
+                            <li><a href="{% url 'login' %}">login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="formsection">
+        <form method="POST">
+            <h1 style="color:red;">{{error1}}</h1>
+            {% csrf_token %}
+            <h1 id="msg">Speak anything...</h1>
+            <button type="submit" id="btn">Speak</button>
+            <div class="con">
+                <input type="text" name="txt1" readonly value="{{text1}}" class="textbox">
+                <select name="select1">
+                    {% for code , name in language.items %}
+                    <option value="{{code}}" {% if code == 'en' %}selected{% endif %}>{{name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="con">
+                <input type="text" name="txt1" readonly value="{{final_result}}" class="textbox">
+                <select name='select2'>
+                    {% for code , name in language.items %}
+                    <option value="{{code}}" >{{name}}</option>
+                    {% endfor %}
+                </select>
+            </div> 
+            <input type="text" value="{{pron}}" class="textbox">
+        </form>
+    </section>
+    
+</body>
+<script>
+    let msg1=document.getElementById("msg");
+    let btn1=document.getElementById("btn");
+    let textbox1=document.getElementsByClassName("textbox");
+    
+    btn1.addEventListener("click",work)
+    
+    function work(){
+        console.log("clicked");
+        msg1.setAttribute("style","display:block;")
+        for(let i=0;i<textbox1.length;i++)
+        if( textbox1[i].value!=""){
+            textbox1[i].value="";
+    
+        }
+    
+    }
+    
+    function work2(){
+        if(textbox1[0].value!=""){
+            msg1.setAttribute("style","display:none");
+        }
+    };
+    
+    setTimeout(work2,1000);
+
+</script>
+</html>
