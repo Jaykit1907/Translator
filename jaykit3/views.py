@@ -1,15 +1,18 @@
 from django.shortcuts import render,redirect
+from Signup.models import Signup
 from googletrans import Translator,LANGUAGES
 from playsound import playsound
 from gtts import gTTS
 import os
 import speech_recognition
 import mysql.connector
+import bcrypt
 
 
 final_result=''
 def home(request):
     langguage=LANGUAGES
+    selected_option=None
     
     try:
         if request.method=="POST":
@@ -17,9 +20,10 @@ def home(request):
             lan=request.POST["selected_language"]
             if 'resultbtn' in request.POST:
                 print("hii")
+                selected_option=lan
                 result=Translator().translate(text1,src='en',dest=lan)
                 final_result=result.text
-                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage})
+                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option":lan})
             
             if 'speakbtn' in request.POST:
                 print("Hellow")
@@ -30,7 +34,7 @@ def home(request):
                 audio_sound.save("voice.mp3")
                 playsound("voice.mp3")
                 os.remove("voice.mp3")
-                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage})
+                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option":lan})
 
             
         
@@ -45,6 +49,8 @@ def home(request):
 
 def speak(request):
     language=LANGUAGES
+    selected_option1=None
+    selected_option2=None
     
     try:
         if request.method=="POST":
@@ -54,6 +60,8 @@ def speak(request):
             recognizer=speech_recognition.Recognizer()
             with speech_recognition.Microphone() as source:
                 
+                selected_option1=sel1
+                selected_option2=sel2
                 print("Speak Anything :")
                 audio=recognizer.listen(source)
                 text=recognizer.recognize_google(audio,language=sel1)
@@ -74,14 +82,14 @@ def speak(request):
                 a.save("voice.mp3")
                 playsound("voice.mp3")
                 os.remove("voice.mp3")
-            return render(request,'speak.html',{"language":language,"final_result":final_result,"text1":text,"pron":pron})
+            return render(request,'speak.html',{"language":language,"final_result":final_result,"text1":text,"pron":pron,"selected_option1":selected_option1,"selected_option2":selected_option2})
         
     except Exception as e:
         print(e)
         print(type(e))
 
     
-        return render(request,'speak.html',{"error1":f"Network error:{e}"})
+        return render(request,'speak.html',{"error1":f"Error:{e}","language":language,'selected_option1':selected_option1,"selected_option2":selected_option2})
     
     return render(request,'speak.html',{'language':language})
 
@@ -95,26 +103,57 @@ def signup(request):
             phone1=request.POST['phone']
             email1=request.POST['email']
             password1=request.POST['password']
-            connection=mysql.connector.connect(host='localhost',user='root',database='jaykit4',password='pass123')
         
-            con=connection.cursor()
-            con.execute("insert into signup values (%s,%s,%s,%s,%s)",(fname1,lname1,phone1,email1,password1))
-            connection.commit()
-            print("data inserted")
+            # connection=mysql.connector.connect(host='localhost',user='root',database='jaykit4',password='pass123')
+        
+            # con=connection.cursor()
+            # con.execute("insert into signup values (%s,%s,%s,%s,%s)",(fname1,lname1,phone1,email1,password1))
+            # connection.commit()
+            # print("data inserted")
+            # con.close()
+            em=Signup(first_name=fname1,last_name=lname1,phone=phone1,email=email1,password=password1)
+            em.save()
             return redirect("/login/")
+            
         
     except Exception as e:
         print(e)
         print("except block executed")
-        
-    
-    
-    
-    
+
     return render(request,'signup.html')
 
 
 def login(request):
     
+    try:
+        if request.method=="POST":
+            email1=request.POST['email']
+            password1=request.POST['password']
+            
+            connection=mysql.connector.connect(host='localhost',database='jaykit4',password="pass123",user="root")
+            cur=connection.cursor()
+            cur.execute("select password from signup where email=%s",(email1,))
+            verify=cur.fetchone()
+            verify=str(verify)
+            print(type(verify))
+            print("database password:"+verify)
+            print(type(password1))
+            password1=tuple(password1)
+            print("login passord:"+password1)
+            if verify == password1:
+               print("login successufl")
+                
+            else:
+               print("invalid user")
+            
+            
+            
+            
+        
+        
+    except Exception as e:
+        print(e)
+        print("dont' have an account")
     
-    return redirect(request,"login.html")
+    
+    return render(request,"login.html")

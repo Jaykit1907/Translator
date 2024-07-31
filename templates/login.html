@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translator</title>
-    <link rel="stylesheet" type="text/css" href="static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/signup.css">
+   
    
 </head>
 <body>
@@ -18,7 +20,24 @@
             </ul>
         </div>
     </nav>
+    <section class="form-parent">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-container">
+                    <div class="form-divide">
+                        <img src="" alt="image">
+                    </div>
+                    <div class="form-divide">
+                           
+                                <input type="email" name="email" placeholder="email">
+                                <input type="text" name="password" placeholder="password">
+                    </div>
+                    
+            </div>
+            <button type="submit">Login</button>
+            <p>Don't have an account<a href="{% url 'signup' %}">Signup</a></p>
+        </form>
+    </section>
   
 </body>
-<script src="/static/script.js"></script>
 </html>

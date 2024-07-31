@@ -22,7 +22,7 @@
 
     <section class="formsection">
         <form method="POST">
-            <h1 style="color:red;">{{error1}}</h1>
+            <h1 style="color:red;" id="error">{{error1}}</h1>
             {% csrf_token %}
             <h1 id="msg">Speak anything...</h1>
             <button type="submit" id="btn">Speak</button>
@@ -30,7 +30,7 @@
                 <input type="text" name="txt1" readonly value="{{text1}}" class="textbox">
                 <select name="select1">
                     {% for code , name in language.items %}
-                    <option value="{{code}}" {% if code == 'en' %}selected{% endif %}>{{name}}</option>
+                    <option value="{{code}}" {% if selected_option1 == code %} selected {% endif %}>{{name}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -38,7 +38,7 @@
                 <input type="text" name="txt1" readonly value="{{final_result}}" class="textbox">
                 <select name='select2'>
                     {% for code , name in language.items %}
-                    <option value="{{code}}" >{{name}}</option>
+                    <option value="{{code}}" {% if selected_option2 == code %} selected {% endif %}>{{name}}</option>
                     {% endfor %}
                 </select>
             </div> 
@@ -50,13 +50,15 @@
 <script>
     let msg1=document.getElementById("msg");
     let btn1=document.getElementById("btn");
+    let err=document.getElementById("error");
     let textbox1=document.getElementsByClassName("textbox");
     
     btn1.addEventListener("click",work)
     
     function work(){
         console.log("clicked");
-        msg1.setAttribute("style","display:block;")
+        msg1.setAttribute("style","display:block;");
+        err.setAttribute("style","display:none");
         for(let i=0;i<textbox1.length;i++)
         if( textbox1[i].value!=""){
             textbox1[i].value="";

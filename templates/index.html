@@ -27,7 +27,7 @@
 
         <select name="selected_language">
             {% for code, name in language.items %}
-            <option value="{{code}}" >{{name}}</option>
+            <option value="{{code}}" {% if selected_option == code %} selected {% endif %}>{{name}}</option>
             {% endfor %}
         
         </select>

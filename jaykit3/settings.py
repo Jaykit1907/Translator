@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Signup',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,17 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+
+#database connect
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':"jaykit4",
+         'USER':"root",
+         'PASSWORD':'pass123',
+         'HOST':"localhost",
+         "port":'3306',
+    }
+}
+
