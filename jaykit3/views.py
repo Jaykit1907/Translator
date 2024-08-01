@@ -12,29 +12,30 @@ import bcrypt
 final_result=''
 def home(request):
     langguage=LANGUAGES
-    selected_option=None
+    selected_option2=None
     
     try:
         if request.method=="POST":
             text1=request.POST['textarea1']
-            lan=request.POST["selected_language"]
+            lan1=request.POST["selected_language1"]
+            lan2=request.POST["selected_language2"]
             if 'resultbtn' in request.POST:
                 print("hii")
-                selected_option=lan
-                result=Translator().translate(text1,src='en',dest=lan)
+                selected_option2=lan2
+                result=Translator().translate(text1,src=lan1,dest=lan2)
                 final_result=result.text
-                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option":lan})
+                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option1":lan1,"selected_option2":lan2})
             
             if 'speakbtn' in request.POST:
                 print("Hellow")
                 
-                result=Translator().translate(text1,src='en',dest=lan)
+                result=Translator().translate(text1,src=lan1,dest=lan2)
                 final_result=result.text
                 audio_sound=gTTS(final_result,lang='en')
                 audio_sound.save("voice.mp3")
                 playsound("voice.mp3")
                 os.remove("voice.mp3")
-                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option":lan})
+                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option1":lan1,"selected_option2":lan2})
 
             
         
@@ -132,7 +133,7 @@ def login(request):
             
             connection=mysql.connector.connect(host='localhost',database='jaykit4',password="pass123",user="root")
             cur=connection.cursor()
-            cur.execute("select password from signup where email=%s",(email1,))
+            cur.execute("select password from signup_signup where email=%s",(email1,))
             verify=cur.fetchone()
             verify=str(verify)
             print(type(verify))

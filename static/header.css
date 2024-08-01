@@ -1,0 +1,40 @@
+*{
+    padding:0px;
+    margin:0;
+    box-sizing:border-box;
+
+
+}
+body{
+    background-color: aquamarine;
+
+}
+
+nav{
+    height:60px;
+    width:100%;
+  
+}
+
+nav ul{
+    background-image:linear-gradient(to right,blue,rgb(88, 88, 114));
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    height:60px;
+    width:100%;
+    flex-direction: row;
+}
+
+nav ul li{
+    list-style-type: none;
+}
+nav ul li a{
+    text-decoration: none;
+    font-size:17px;
+    font-weight: 800;
+
+    color:white;
+}
+
+

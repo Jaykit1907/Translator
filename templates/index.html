@@ -1,44 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translator</title>
-    <link rel="stylesheet" type="text/css" href="static/style.css">
-   
-</head>
-<body>
-    <nav>
-        <div class="nav-container">
-                        <ul>
-                            <li><a href="{% url 'home' %}">home</a></li>
-                            <li><a href="{% url 'speak' %}">speak</a></li>
-                            <li><a href="{% url 'signup' %}">signup</a></li>
-                            <li><a href="{% url 'login' %}">login</a></li>
-            </ul>
-        </div>
-    </nav>
+    {% extends "base.html" %}
+
+    {% block content %}
     <section class="formsection">
    
     <form method="POST">
         {% csrf_token %}
-        <input type="textarea" name="textarea1" placeholder="enter the text" value="{{text1}}" required>
-       
 
-        <select name="selected_language">
+        <div class="parent_container">
+        <div class="textinput">
+            
+            <select name="selected_language1">
+                {% for code, name in language.items %}
+                <option value="{{code}}" {% if selected_option1 == code %} selected {% endif %}>{{name}}</option>
+                {% endfor %}
+            
+            </select>
+
+        <input type="textarea" name="textarea1" placeholder="enter the text" value="{{text1}}" required>
+
+        <div id="btn">
+            <button type="submit" name="resultbtn" value="btn1" id="btn1">Translate</button>
+            <button type="submit" name='speakbtn' value="btn2" id="btn2">Speak</button>
+            </div>
+        </div>
+        <div class="textinput">
+        <select name="selected_language2">
             {% for code, name in language.items %}
-            <option value="{{code}}" {% if selected_option == code %} selected {% endif %}>{{name}}</option>
+            <option value="{{code}}" {% if selected_option2 == code %} selected {% endif %}>{{name}}</option>
             {% endfor %}
         
         </select>
-        <input type="textarea" name="textarea2" value="{{final_result}}" id="text2">
-
-        <div id="btn">
-        <button type="submit" name="resultbtn" value="btn1" id="btn1">Translate</button>
-        <button type="submit" name='speakbtn' value="btn2" id="btn2">Speak</button>
+        <input type="textarea" name="textarea2" value="{{final_result}}" id="text2" readonly>
         </div>
+        </div>
+
     </form>
     </section>
 </body>
 <script src="/static/script.js"></script>
-</html>
+</html> {% endblock %}  
+ 
+

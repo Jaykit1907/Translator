@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
-    <link rel="stylesheet" type="text/css" href="/static/signup.css">
-   
-</head>
-<body>
-    <nav>
-        <div class="nav-container">
-                        <ul>
-                            <li><a href="{% url 'home' %}">home</a></li>
-                            <li><a href="{% url 'speak' %}">speak</a></li>
-                            <li><a href="{% url 'signup' %}">signup</a></li>
-                            <li><a href="{% url 'login' %}">login</a></li>
-            </ul>
-</div>
-    </nav>
+        {% extends "base.html" %}
+
+        {% block content %}
 
 
     <section class="form-parent">
@@ -43,3 +25,5 @@
     </section>
 </body>
 </html>
+
+{% endblock %}
