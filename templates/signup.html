@@ -8,7 +8,7 @@
             {% csrf_token %}
             <div class="form-container">
                     <div class="form-divide">
-                        <img src="" alt="image">
+                        <img src="/static/sign-up.png" alt="image">
                     </div>
                     <div class="form-divide">
                                 <input type="text" name="fname" placeholder="first name">
@@ -16,11 +16,13 @@
                                 <input type="number" name="phone" placeholder="phone number">
                                 <input type="email" name="email" placeholder="email">
                                 <input type="text" name="password" placeholder="password">
+
+                                <button type="submit">Signup</button>
+                                <p>Already have an account <a href="{% url "login" %}">Login</a></p>
                     </div>
                     
             </div>
-            <button type="submit">Signup</button>
-            <p>Already have an account <a href="##">Login</a></p>
+
         </form>
     </section>
 </body>

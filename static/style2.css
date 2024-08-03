@@ -15,16 +15,8 @@
     flex-direction: row;
     width:95%;
 }
-button{
-    color:white;
-    background-color: blue;
-    height:40px;
-    width:80px;
-    border-radius: 5px;
-    cursor:pointer;
-    border:1px solid blue;
-    margin:0px 10px;
-}
+
+
 #btn{
 
     height:40px;
@@ -83,5 +75,42 @@ select {
 
     
 }
+#btn1{
+    color:white;
+    background-color: blue;
+    height:40px;
+    width:80px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor:pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 
+}
+#btn1:hover{
+    transform:scale(1.1,1.1);
+    transition:all 0.1s linear;
+    box-shadow: 0px 0px 5px white;
+
+}
+
+#btn2{
+    color:white;
+    background-color: blue;
+    height:40px;
+    width:80px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor:pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+}
+#btn2:hover{
+    transform:scale(1.1,1.1);
+    transition:all 0.1s linear;
+    box-shadow: 0px 0px 5px white;
+}
 

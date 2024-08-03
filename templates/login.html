@@ -6,17 +6,19 @@
             {% csrf_token %}
             <div class="form-container">
                     <div class="form-divide">
-                        <img src="" alt="image">
+                        <img src="/static/login.png" alt="image">
                     </div>
                     <div class="form-divide">
                            
-                                <input type="email" name="email" placeholder="email">
-                                <input type="text" name="password" placeholder="password">
+                                <input type="email" name="email" placeholder="email" required>
+                                <input type="text" name="password" placeholder="password" required>
+
+                                <button type="submit">Login</button>
+                                <p>Don't have an account<a href="{% url 'signup' %}">Signup</a></p>
                     </div>
                     
             </div>
-            <button type="submit">Login</button>
-            <p>Don't have an account<a href="{% url 'signup' %}">Signup</a></p>
+
         </form>
     </section>
   
