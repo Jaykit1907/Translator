@@ -65,3 +65,30 @@
     text-decoration: none;
     font-weight: 500;
 }
+
+
+
+
+
+
+.btnhvr{
+    color:white;
+    background-color: blue;
+    height:40px;
+    width:80px;
+    font-weight: 700;
+    border-radius: 5px;
+    cursor:pointer;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.btnhvr:hover{
+    transform:scale(1.1,1.1);
+    transition:all 0.1s linear;
+    box-shadow: 0px 0px 5px white;
+}
+
+
+

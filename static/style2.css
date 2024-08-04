@@ -5,7 +5,6 @@
     align-items: center;
     justify-content: center;
     gap:10px;
-
     flex-direction:column;
     height: auto;
     width:100%;
@@ -28,7 +27,7 @@
     justify-content: flex-stat;
     cursor:pointer;
     padding:50px;
-    background-color: aquamarine;
+    background-color: rgb(222, 241, 235);
     
     
     
@@ -60,7 +59,7 @@ select {
     align-items:flex-end;  
     width:100%;
     gap:5px;
-    background-color: aquamarine;
+    background-color: rgb(222, 241, 235);
     
     
 

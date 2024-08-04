@@ -11,13 +11,13 @@
                         <img src="/static/sign-up.png" alt="image">
                     </div>
                     <div class="form-divide">
-                                <input type="text" name="fname" placeholder="first name">
-                                <input type="text" name="lname" placeholder="last name" >
-                                <input type="number" name="phone" placeholder="phone number">
-                                <input type="email" name="email" placeholder="email">
-                                <input type="text" name="password" placeholder="password">
+                                <input type="text" name="fname" placeholder="first name" required>
+                                <input type="text" name="lname" placeholder="last name" required>
+                                <input type="number" name="phone" placeholder="phone number" required>
+                                <input type="email" name="email" placeholder="email" required>
+                                <input type="text" name="password" placeholder="password" required>
 
-                                <button type="submit">Signup</button>
+                                <button type="submit" class="btnhvr">Signup</button>
                                 <p>Already have an account <a href="{% url "login" %}">Login</a></p>
                     </div>
                     

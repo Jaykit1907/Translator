@@ -6,7 +6,7 @@
 
 }
 body{
-    background-color: aquamarine;
+    background-color: rgb(222, 241, 235);
 
 }
 
@@ -17,7 +17,7 @@ nav{
 }
 
 nav ul{
-    background-image:linear-gradient(to right,rgb(12, 12, 146),rgb(13, 13, 206));
+    background-image:linear-gradient(to right,rgb(15, 15, 231),rgb(42, 42, 128));
     display:flex;
     justify-content: space-around;
     align-items: center;
