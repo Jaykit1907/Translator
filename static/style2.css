@@ -112,4 +112,8 @@ select {
     transition:all 0.1s linear;
     box-shadow: 0px 0px 5px white;
 }
+#speaker{
+    font-size:18px;
+    padding-left:5px;
+}
 

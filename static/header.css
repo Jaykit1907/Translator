@@ -17,7 +17,7 @@ nav{
 }
 
 nav ul{
-    background-image:linear-gradient(to right,rgb(15, 15, 231),rgb(42, 42, 128));
+    background-image:linear-gradient(to right,rgb(15, 15, 231),rgb(34, 34, 95));
     display:flex;
     justify-content: space-around;
     align-items: center;
