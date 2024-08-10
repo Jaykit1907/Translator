@@ -29,12 +29,55 @@
 
 }
 
+
 #msg{
     display:none;
-    height:20px;
-    color:rgb(221, 210, 210);
+
+    align-items: center;
+     
+    height:50px;
+    width:70%;
 
 }
+#msg h1{
+    display: flex;
+    justify-content:flex-end;
+    width:60%;
+    color:rgb(221, 210, 210);
+   
+
+}
+#msg i {
+    color:rgb(221,210,210);
+    border:1px solid rgb(221, 210, 210);
+    font-size:20px;
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    margin-left:8px;
+    animation: rounder 1s linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes rounder{
+    0%{
+        height:40px;
+        width:40px;
+        border-radius:20%;
+
+    }
+    50%{
+        height:30px;
+        width:30px;
+        border-radius: 50%;
+    }
+    100%{
+        width:40px;
+        height:40px;
+        border:none;
+    }
+}
+
 
 .error{
     height:20px;
