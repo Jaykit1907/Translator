@@ -104,6 +104,8 @@ def signup(request):
             phone1=request.POST['phone']
             email1=request.POST['email']
             password1=request.POST['password']
+            hashed_password = hash_password(password1)
+
         
             # connection=mysql.connector.connect(host='localhost',user='root',database='jaykit4',password='pass123')
         
@@ -112,7 +114,7 @@ def signup(request):
             # connection.commit()
             # print("data inserted")
             # con.close()
-            em=Signup(first_name=fname1,last_name=lname1,phone=phone1,email=email1,password=password1)
+            em=Signup(first_name=fname1,last_name=lname1,phone=phone1,email=email1,password=hashed_password)
             em.save()
             return redirect("/login/")
             
@@ -123,6 +125,13 @@ def signup(request):
 
     return render(request,'signup.html')
 
+
+def hash_password(plain_text_password):
+    # Generate a salt
+    salt = bcrypt.gensalt()
+    # Hash the password
+    hashed_password = bcrypt.hashpw(plain_text_password.encode('utf-8'), salt)
+    return hashed_password
 
 def login(request):
     
