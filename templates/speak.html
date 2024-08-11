@@ -42,7 +42,10 @@ let textbox1=document.getElementsByClassName("textbox");
 
 btn1.addEventListener("click",work)
 
+
+
 function work(){
+    setTimeout(function(){
     console.log("clicked");
     msg1.setAttribute("style","display:flex;");
     err.setAttribute("style","display:none");
@@ -51,6 +54,7 @@ function work(){
         textbox1[i].value="";
 
     }
+},500)
 
 }
 

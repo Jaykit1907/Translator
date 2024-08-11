@@ -53,6 +53,7 @@ def speak(request):
     selected_option1=None
     selected_option2=None
     
+    
     try:
         if request.method=="POST":
             sel1=request.POST["select1"]
@@ -81,10 +82,13 @@ def speak(request):
                 
                 a=gTTS(final_result,lang=sel2)
                 a.save("voice.mp3")
+                absolute_path = os.path.abspath("voice.mp3")
+                print(absolute_path)
                 playsound("voice.mp3")
                 os.remove("voice.mp3")
+              
             return render(request,'speak.html',{"language":language,"final_result":final_result,"text1":text,"pron":pron,"selected_option1":selected_option1,"selected_option2":selected_option2})
-        
+
     except Exception as e:
         print(e)
         print(type(e))
@@ -107,15 +111,15 @@ def signup(request):
             hashed_password = hash_password(password1)
 
         
-            # connection=mysql.connector.connect(host='localhost',user='root',database='jaykit4',password='pass123')
+            connection=mysql.connector.connect(host='localhost',user='root',database='jaykit4',password='pass123')
         
-            # con=connection.cursor()
-            # con.execute("insert into signup values (%s,%s,%s,%s,%s)",(fname1,lname1,phone1,email1,password1))
-            # connection.commit()
-            # print("data inserted")
-            # con.close()
-            em=Signup(first_name=fname1,last_name=lname1,phone=phone1,email=email1,password=hashed_password)
-            em.save()
+            con=connection.cursor()
+            con.execute("insert into signup values (%s,%s,%s,%s,%s)",(fname1,lname1,phone1,email1,hashed_password))
+            connection.commit()
+            print("data inserted")
+            con.close()
+            # em=Signup(first_name=fname1,last_name=lname1,phone=phone1,email=email1,password=hashed_password)
+            # em.save()
             return redirect("/login/")
             
         
@@ -126,12 +130,14 @@ def signup(request):
     return render(request,'signup.html')
 
 
+
 def hash_password(plain_text_password):
-    # Generate a salt
     salt = bcrypt.gensalt()
-    # Hash the password
     hashed_password = bcrypt.hashpw(plain_text_password.encode('utf-8'), salt)
     return hashed_password
+
+
+
 
 def login(request):
     
@@ -139,31 +145,68 @@ def login(request):
         if request.method=="POST":
             email1=request.POST['email']
             password1=request.POST['password']
+             # connection = mysql.connector.connect(host='localhost',database='jaykit4',password="pass123",user="root")
             
-            connection=mysql.connector.connect(host='localhost',database='jaykit4',password="pass123",user="root")
-            cur=connection.cursor()
-            cur.execute("select password from signup_signup where email=%s",(email1,))
-            verify=cur.fetchone()
-            verify=str(verify)
-            print(type(verify))
-            print("database password:"+verify)
-            print(type(password1))
-            password1=tuple(password1)
-            print("login passord:"+password1)
-            if verify == password1:
-               print("login successufl")
-                
+            # cursor = connection.cursor()
+            
+            # cursor.execute( "SELECT password FROM signup_signup WHERE email = %s", (email1,))
+            # result = cursor.fetchone()
+            
+            
+            # cursor.close()
+            # connection.close()
+            # print(result)
+            # if result:
+            #     hashed_password = result[0]
+            #     if check_password(password1, hashed_password):
+            #         print("Login successful!")
+            #         # Redirect the user to the dashboard or another page
+            #     else:
+            #         print("Invalid password.")
+            # else:
+            #     print("User not found.")
+            
+           
+# Establish connection to the database
+            conn = mysql.connector.connect(host='localhost',database='jaykit4',password="pass123",user="root")
+
+            cursor = conn.cursor()
+
+        # Username and password entered by the user
+            username = email1
+            entered_password =password1
+
+        # Retrieve the stored hashed password for the given username
+            select_query = "SELECT password FROM signup WHERE email = %s"
+            cursor.execute(select_query, (username,))
+            result = cursor.fetchone()
+
+            if result:
+                stored_hashed_password = result[0]
+
+            # Verify the entered password against the stored hashed password
+                if bcrypt.checkpw(entered_password.encode('utf-8'), stored_hashed_password.encode('utf-8')):
+                    print("Login successful!")
+                    return redirect('/')
+                else:
+                    print("Incorrect password.")
             else:
-               print("invalid user")
-            
-            
-            
-            
-        
-        
+             print("Username not found.")
+
+        # Close the connection
+        cursor.close()
+        conn.close()
+
+                
     except Exception as e:
+        print("exception block")
         print(e)
-        print("dont' have an account")
-    
-    
+        
+        
     return render(request,"login.html")
+        
+
+def check_password(plain_text_password, hashed_password):
+    
+    hashed_password1 = bytes(hashed_password, 'utf-8')
+    return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_password1)
