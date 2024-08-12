@@ -145,28 +145,7 @@ def login(request):
         if request.method=="POST":
             email1=request.POST['email']
             password1=request.POST['password']
-             # connection = mysql.connector.connect(host='localhost',database='jaykit4',password="pass123",user="root")
-            
-            # cursor = connection.cursor()
-            
-            # cursor.execute( "SELECT password FROM signup_signup WHERE email = %s", (email1,))
-            # result = cursor.fetchone()
-            
-            
-            # cursor.close()
-            # connection.close()
-            # print(result)
-            # if result:
-            #     hashed_password = result[0]
-            #     if check_password(password1, hashed_password):
-            #         print("Login successful!")
-            #         # Redirect the user to the dashboard or another page
-            #     else:
-            #         print("Invalid password.")
-            # else:
-            #     print("User not found.")
-            
-           
+
 # Establish connection to the database
             conn = mysql.connector.connect(host='localhost',database='jaykit4',password="pass123",user="root")
 
@@ -190,8 +169,10 @@ def login(request):
                     return redirect('/')
                 else:
                     print("Incorrect password.")
+                    return render(request,"login.html",{"error":True,"message":"Username or Password Invalid.Please try again"})
             else:
              print("Username not found.")
+             return render(request,"login.html",{"error":True,"message":"User not found"})
 
         # Close the connection
         cursor.close()
