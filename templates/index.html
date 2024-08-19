@@ -2,6 +2,17 @@
 
     {% block content %}
     <section class="formsection">
+        {% if error %}
+        <section id="loginmsg_container">
+            <div id="loginmsg">
+                <h1>{{message}}</h1>
+                <i class="fa-solid fa-x" id="loginmsgcancel"></i>
+    
+            </div>
+            
+            
+        </section>
+        {% endif %}
    
     <form method="POST">
         {% csrf_token %}
@@ -16,7 +27,7 @@
             
             </select>
 
-        <input type="textarea" name="textarea1" placeholder="enter the text" value="{{text1}}" required>
+        <textarea name="textarea1" placeholder="enter the text"  required class="textareabox">{{text1}}</textarea>
 
         <div id="btn">
             <button type="submit" name="resultbtn" value="btn1" id="btn1" class="speakbtn">Translate</button>
@@ -30,14 +41,25 @@
             {% endfor %}
         
         </select>
-        <input type="textarea" name="textarea2" value="{{final_result}}" id="text2" readonly>
+        <textarea name="textarea2"  id="text2" readonly class="textareabox">{{final_result}}</textarea>
+
         </div>
         </div>
 
     </form>
     </section>
 </body>
-<script src="/static/script.js"></script>
+<script>
+    let cancellogin=document.getElementById("loginmsgcancel");
+    let loginmsg_con=document.getElementById("loginmsg_container");
+
+    cancellogin.addEventListener("click",function(){
+        loginmsg_con.setAttribute("style","display:none");
+
+    });
+
+
+</script>
 </html> {% endblock %}  
  
 

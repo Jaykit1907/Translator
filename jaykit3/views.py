@@ -13,6 +13,7 @@ final_result=''
 def home(request):
     langguage=LANGUAGES
     selected_option2=None
+    final_result=""
     
     try:
         if request.method=="POST":
@@ -24,6 +25,7 @@ def home(request):
                 selected_option2=lan2
                 result=Translator().translate(text1,src=lan1,dest=lan2)
                 final_result=result.text
+                print(final_result)
                 return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option1":lan1,"selected_option2":lan2})
             
             if 'speakbtn' in request.POST:
@@ -31,7 +33,7 @@ def home(request):
                 
                 result=Translator().translate(text1,src=lan1,dest=lan2)
                 final_result=result.text
-                audio_sound=gTTS(final_result,lang='en')
+                audio_sound=gTTS(final_result,lang='en',tld='co.in')
                 audio_sound.save("voice.mp3")
                 playsound("voice.mp3")
                 os.remove("voice.mp3")
@@ -42,6 +44,8 @@ def home(request):
         
     except Exception as e:
         print(e)
+        # return render(request,"index.html",{"error":True,"message":"Network error"})
+
         
             
             
