@@ -24,5 +24,8 @@ urlpatterns = [
     path('speak/',views.speak,name='speak'),
     path('signup/',views.signup,name='signup'),
     path('login/',views.login,name='login'),
+    path('image/',views.upload_image,name="image"),
+    path('translate/', views.translate_image, name='translate_image'),
+    
     
 ]

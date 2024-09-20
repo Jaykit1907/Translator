@@ -1,14 +1,25 @@
+
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translator</title>
-    <link rel="stylesheet" type="text/css" href="/static/style2.css">
-    <link rel="stylesheet" type="text/css" href="/static/header.css">
-    <link rel="stylesheet" type="text/css" href="/static/speak.css">
-    <link rel="stylesheet" type="text/css" href="/static/signup.css">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/signup.css">
+    <!-- <link rel="stylesheet" href="{% static 'css/styles.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="/static/css/style2.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/header.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/speak.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/static/pdf.css"> 
+    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+   
+
 
    
 </head>
@@ -16,10 +27,12 @@
     <nav>
         
                         <ul>
-                            <li><a href="{% url 'home' %}">home</a></li>
-                            <li><a href="{% url 'speak' %}">speak</a></li>
-                            <li><a href="{% url 'signup' %}">signup</a></li>
-                            <li><a href="{% url 'login' %}">login</a></li>
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'speak' %}">Speak</a></li>
+                            <li><a href="{% url 'image' %}">Image</a></li>
+                            <li><a href="{% url 'signup' %}">Signup</a></li>
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                            
             </ul>
         
     </nav>

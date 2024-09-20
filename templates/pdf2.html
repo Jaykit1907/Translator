@@ -1,0 +1,57 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+   
+   <link rel="stylesheet" type="text/css" href="/static/css/pdf.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+
+
+    <div class="container">
+        <h1>Capture or Upload Image to Translate</h1>
+
+        <!-- Camera Capture -->
+        <video id="camera" autoplay></video>
+        <br>
+        <button id="capture-btn">Capture from Camera</button>
+        <button id="take-photo-btn" style="display:none;">Take Photo</button>
+
+        <!-- File Upload -->
+        <h3>OR</h3>
+        <input type="file" id="file-input" accept="image/*">
+
+        <!-- Cropping Preview Area -->
+        <h3>Crop Image</h3>
+        <div class="crop-container">
+            <img id="image" style="display: none;">
+        </div>
+        <canvas id="canvas" style="display: none;"></canvas>
+
+        <!-- Language Selection -->
+        <h3>Select Language</h3>
+        <select name="selected_language2" id="language">
+            <!-- Loop through languages dynamically -->
+            {% for code, name in language.items %}
+            <option value="{{code}}" {% if selected_option2 == code %} selected {% endif %}>{{name}}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Crop, Translate & Display Translated Text -->
+        <br><br>
+        <button id="crop-btn">Crop Image</button>
+        <button id="translate-btn" disabled>Translate Text in Image</button>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loading-spinner"></div>
+
+        <h3>Cropped Image</h3>
+        <img id="cropped-image">
+
+        <h3>Translated Text:</h3>
+        <div id="translated-text"></div>
+    </div>
+
+</body>
+<script src="/static/js/script.js"></script>
+</html>
+{% endblock %}

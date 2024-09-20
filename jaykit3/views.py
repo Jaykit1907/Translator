@@ -7,13 +7,23 @@ import os
 import speech_recognition
 import mysql.connector
 import bcrypt
+from fpdf import FPDF
+import base64
+import cv2
+import numpy as np
+import pytesseract
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import re
+
 
 
 final_result=''
 def home(request):
     langguage=LANGUAGES
-    selected_option2=None
     final_result=""
+    lan1=''
+    lan2=''
     
     try:
         if request.method=="POST":
@@ -22,11 +32,12 @@ def home(request):
             lan2=request.POST["selected_language2"]
             if 'resultbtn' in request.POST:
                 print("hii")
-                selected_option2=lan2
+          
                 result=Translator().translate(text1,src=lan1,dest=lan2)
                 final_result=result.text
                 print(final_result)
-                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option1":lan1,"selected_option2":lan2})
+                return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option1":lan1,"selected_option2":lan2,"error":False})
+            
             
             if 'speakbtn' in request.POST:
                 print("Hellow")
@@ -39,12 +50,9 @@ def home(request):
                 os.remove("voice.mp3")
                 return render(request,"index.html",{"final_result":final_result,"text1":text1,"language":langguage,"selected_option1":lan1,"selected_option2":lan2})
 
-            
-        
-        
     except Exception as e:
         print(e)
-        # return render(request,"index.html",{"error":True,"message":"Network error"})
+        return render(request,"index.html",{"error":True,"message":"Network error","language":langguage,"selected_option1":lan1,"selected_option2":lan2})
 
         
             
@@ -79,6 +87,8 @@ def speak(request):
                 final_result=result.text
                 print(final_result)
                 pron=str(result.pronunciation)
+                
+
                 
                 if pron=="None":
                     pron=final_result
@@ -195,3 +205,45 @@ def check_password(plain_text_password, hashed_password):
     
     hashed_password1 = bytes(hashed_password, 'utf-8')
     return bcrypt.checkpw(plain_text_password.encode('utf-8'), hashed_password1)
+
+
+import base64
+from django.shortcuts import render
+import pytesseract
+from PIL import Image
+from io import BytesIO
+from googletrans import Translator,LANGUAGES
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+translator = Translator()
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+def upload_image(request):
+    langguage=LANGUAGES
+    return render(request, "pdf2.html",{"language":langguage})
+
+@csrf_exempt
+def translate_image(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        image_data = data.get('image')
+        language = data.get('language')
+
+        # Decode the image data from base64
+        image_data = image_data.split(',')[1]  # remove base64 header
+        image = Image.open(BytesIO(base64.b64decode(image_data)))
+
+        # Perform OCR to extract text from image
+        extracted_text = pytesseract.image_to_string(image)
+
+        # Translate the extracted text
+        translated_text = translator.translate(extracted_text, dest=language).text
+        print(translated_text)
+
+        # Return translated text as JSON
+        return JsonResponse({'translated_text': translated_text})
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
