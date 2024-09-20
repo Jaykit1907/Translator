@@ -102,6 +102,7 @@ cropBtn.addEventListener('click', () => {
 // Handle translation
 translateBtn.addEventListener('click', () => {
     const language = document.getElementById('language').value;
+    const language1= document.getElementById('language1').value;
     const croppedDataURL = croppedImage.src;
 
     // Show loading spinner
@@ -115,7 +116,7 @@ translateBtn.addEventListener('click', () => {
             'Content-Type': 'application/json',
             'X-CSRFToken': getCookie('csrftoken')
         },
-        body: JSON.stringify({ image: croppedDataURL, language: language })
+        body: JSON.stringify({ image: croppedDataURL, language: language , language1: language1})
     })
     .then(response => response.json())
     .then(data => {
@@ -145,3 +146,27 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+
+
+
+
+
+//for online and offline check
+
+function updateOnlineStatus() {
+    const offlineMessage = document.getElementById('offlineMessage');
+    if (navigator.onLine) {
+      offlineMessage.style.display = 'none';
+    } else {
+      offlineMessage.style.display = 'block';
+    }
+  }
+
+  // Initial check
+  updateOnlineStatus();
+
+
+  // Listen for online/offline events
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);

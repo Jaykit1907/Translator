@@ -243,3 +243,12 @@ select {
 }
 
 
+#offlineMessage {
+    display:none;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    
+  }

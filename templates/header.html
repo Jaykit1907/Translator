@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/static/pdf.css"> 
     <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.css">
-    <link rel="stylesheet" type="text/css" href="/static/css/styles.css">
+    <script src="/static/js/script.js"></script>
    
 
 
@@ -36,3 +36,27 @@
             </ul>
         
     </nav>
+
+  <div id="offlineMessage">You are currently offline!</div>
+  <script>
+    
+
+//for online and offline check
+
+function updateOnlineStatus() {
+    const offlineMessage = document.getElementById('offlineMessage');
+    if (navigator.onLine) {
+      offlineMessage.style.display = 'none';
+    } else {
+      offlineMessage.style.display = 'block';
+    }
+  }
+
+  // Initial check
+  updateOnlineStatus();
+
+
+  // Listen for online/offline events
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+  </script>

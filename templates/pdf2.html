@@ -6,6 +6,7 @@
    <link rel="stylesheet" type="text/css" href="/static/css/pdf.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
 
+    
 
     <div class="container">
         <h1>Capture or Upload Image to Translate</h1>
@@ -28,13 +29,30 @@
         <canvas id="canvas" style="display: none;"></canvas>
 
         <!-- Language Selection -->
-        <h3>Select Language</h3>
-        <select name="selected_language2" id="language">
+         <div class="selectimage_option">
+            <div class="select_container">
+        <h3>Image language</h3>
+        <select id="language">
             <!-- Loop through languages dynamically -->
             {% for code, name in language.items %}
-            <option value="{{code}}" {% if selected_option2 == code %} selected {% endif %}>{{name}}</option>
+            <option value="{{code}}" {% if code == 'en' %} selected {% endif %}>{{name}}</option>
             {% endfor %}
         </select>
+        
+            </div>
+            <div class="select_container">
+                <h3>Text to Translate</h3>
+                <select id="language1">
+                    <!-- Loop through languages dynamically -->
+                    {% for code, name in language.items %}
+                    <option value="{{code}}" {% if code == 'hi' %} selected {% endif %}>{{name}}</option>
+                    {% endfor %}
+                </select>
+                
+                    </div>
+
+
+         </div>
 
         <!-- Crop, Translate & Display Translated Text -->
         <br><br>

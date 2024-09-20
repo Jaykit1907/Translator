@@ -230,16 +230,18 @@ def translate_image(request):
         data = json.loads(request.body)
         image_data = data.get('image')
         language = data.get('language')
+        language1 = data.get('language1')
+        
 
         # Decode the image data from base64
         image_data = image_data.split(',')[1]  # remove base64 header
         image = Image.open(BytesIO(base64.b64decode(image_data)))
-
+        print(language1)
         # Perform OCR to extract text from image
         extracted_text = pytesseract.image_to_string(image)
 
         # Translate the extracted text
-        translated_text = translator.translate(extracted_text, dest=language).text
+        translated_text = translator.translate(extracted_text, dest=language1).text
         print(translated_text)
 
         # Return translated text as JSON

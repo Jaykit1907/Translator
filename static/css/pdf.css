@@ -2,7 +2,7 @@
 .container {
     max-width: 800px;
     margin: 20px auto;
-    background-color: #fff;
+    background-color: #e7e3e3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     padding: 20px;
     border-radius: 10px;
@@ -81,6 +81,7 @@ input[type="file"] {
     cursor: pointer;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: rgb(146, 197, 146);
 }
 
 select {
@@ -134,9 +135,19 @@ select {
     select, button, input[type="file"] {
         width: 100%;
         margin-bottom: 10px;
+        
+        background-color: rgb(2, 51, 35);
     }
 
     video, .crop-container img {
         width: 100%;
     }
+}
+
+.selectimage_option{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:20px;
+    
 }
