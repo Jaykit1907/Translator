@@ -19,7 +19,8 @@ img, video, canvas {
 }
 #camera{
     width:70%;
-    height: auto;;
+    height: auto;
+    margin:auto auto;
 }
 
 

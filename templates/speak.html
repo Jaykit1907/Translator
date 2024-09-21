@@ -17,7 +17,7 @@
             <input type="text" name="txt1" readonly value="{{text1}}" class="textbox">
             <select name="select1">
                 {% for code , name in language.items %}
-                <option value="{{code}}" {% if selected_option1 == code %} selected {% endif %}>{{name}}</option>
+                <option value="{{code}}" {% if selected_option1 == code  or code == 'en' %} selected {% endif %}>{{name}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -25,7 +25,7 @@
             <input type="text" name="txt1" readonly value="{{final_result}}" class="textbox">
             <select name='select2'>
                 {% for code , name in language.items %}
-                <option value="{{code}}" {% if selected_option2 == code %} selected {% endif %}>{{name}}</option>
+                <option value="{{code}}" {% if selected_option2 == code or code == 'hi' %} selected {% endif %}>{{name}}</option>
                 {% endfor %}
             </select>
         </div> 

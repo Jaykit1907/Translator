@@ -23,9 +23,13 @@
             
             <select name="selected_language1">
                 {% for code, name in language.items %}
-                <option value="{{code}}" {% if selected_option1 == code %} selected {% endif %}>{{name}}</option>
+                <option value="{{code}}"
+                    {% if selected_option1 == code %} selected 
+                    {% elif not selected_option1 and code == 'en' %} selected 
+                    {% endif %}>
+                    {{name}}
+                </option>
                 {% endfor %}
-            
             </select>
 
         <textarea name="textarea1" placeholder="enter the text"  required class="textareabox">{{text1}}</textarea>
@@ -36,12 +40,17 @@
             </div>
         </div>
         <div class="textinput">
-        <select name="selected_language2">
-            {% for code, name in language.items %}
-            <option value="{{code}}" {% if selected_option2 == code %} selected {% endif %}>{{name}}</option>
-            {% endfor %}
-        
-        </select>
+            <select name="selected_language2">
+                {% for code, name in language.items %}
+                <option value="{{code}}"
+                    {% if selected_option2 == code %} selected 
+                    {% elif not selected_option2 and code == 'hi' %} selected 
+                    {% endif %}>
+                    {{name}}
+                </option>
+                {% endfor %}
+            </select>
+            
         <textarea name="textarea2"  id="text2" readonly class="textareabox">{{final_result}}</textarea>
 
         </div>
