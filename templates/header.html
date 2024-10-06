@@ -27,11 +27,11 @@
     <nav>
         
                         <ul>
-                            <li><a href="{% url 'home' %}">Home</a></li>
-                            <li><a href="{% url 'speak' %}">Speak</a></li>
-                            <li><a href="{% url 'image' %}">Image</a></li>
-                            <li><a href="{% url 'signup' %}">Signup</a></li>
-                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                            <li><a href="{% url 'speak' %}" class="nav-link">Speak</a></li>
+                            <li><a href="{% url 'image' %}" class="nav-link">Image</a></li>
+                            <li><a href="{% url 'signup' %}" class="nav-link">Signup</a></li>
+                            <li><a href="{% url 'login' %}" class="nav-link">Login</a></li>
                             
             </ul>
         
@@ -59,4 +59,38 @@ function updateOnlineStatus() {
   // Listen for online/offline events
   window.addEventListener('online', updateOnlineStatus);
   window.addEventListener('offline', updateOnlineStatus);
-  </script>
+  
+  // Get all navigation links
+  const navLinks = document.querySelectorAll('.nav-link');
+  
+  // Function to remove 'active' class from all links
+  function removeActiveClass() {
+      navLinks.forEach(link => {
+          link.classList.remove('active');
+      });
+  }
+  
+  // Function to add 'active' class to the current link
+  function setActiveLink() {
+      // Get the current page URL
+      const currentPath = window.location.pathname;
+  
+      // Loop through each link and check if href matches the current path
+      navLinks.forEach(link => {
+          if (link.getAttribute('href') === currentPath) {
+              link.classList.add('active');
+          }
+      });
+  }
+  
+  // Initialize the active link
+  setActiveLink();
+  
+  // Optionally, add click event listener if you want to manually set it when clicked
+  navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+          removeActiveClass();
+          this.classList.add('active');
+      });
+  });
+</script>
