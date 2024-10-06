@@ -2,8 +2,8 @@
 .container {
     max-width: 800px;
     margin: 20px auto;
-    background-color: #e7e3e3;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: rgb(209, 127, 235,0.6);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -27,6 +27,7 @@ img, video, canvas {
 #cropped-image {
     margin-top: 20px;
     display: none;
+    margin:auto;
 }
 
 .crop-container {

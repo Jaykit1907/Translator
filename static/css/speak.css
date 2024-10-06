@@ -13,7 +13,7 @@
     height:450px;
     display:grid;
     place-items: center;
-    background-color: rgb(39, 69, 146);
+    background-color: rgb(209, 127, 235,0.9);
     box-shadow: 0px 0px 20px rgb(112, 170, 151);
     border-radius: 5px;
     
@@ -43,12 +43,12 @@
     display: flex;
     justify-content:flex-end;
     width:60%;
-    color:rgb(221, 210, 210);
+    color:blue;
    
 
 }
 #msg i {
-    color:rgb(221,210,210);
+    color:blue;
     border:1px solid rgb(221, 210, 210);
     font-size:20px;
     display:flex;
@@ -115,7 +115,7 @@ select {
     display:flex;
     align-items: center;
     justify-content: center;
-    box-shadow:0px 0px 1px white;
+    box-shadow:0px 0px 5px rgb(129, 13, 165);
     
 }
 #speakbtn:hover{

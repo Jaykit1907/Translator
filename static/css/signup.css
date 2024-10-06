@@ -48,7 +48,7 @@
     padding:30px;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    background-color: blue;
+    background-color: rgb(209, 127, 235);
     height: 100%;
     
     
@@ -81,6 +81,8 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    box-shadow:0px 0px 4px rgb(129, 13, 165);
+    
 
     
 }
