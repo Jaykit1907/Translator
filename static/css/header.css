@@ -49,22 +49,7 @@ nav ul li a{
     padding: 10px;
  
 }
-
-/* 
-.nav-link {
-    text-decoration: none;
-    padding: 10px;
-    border-bottom: 3px solid transparent;
-    transition: border-bottom 0.3s;
-}
-
-.active {
-    
-    border-bottom: 2px solid white; 
-   
-} */
-
-/* Style for the navigation links */
+ 
 .nav-link {
     text-decoration: none;
     padding: 10px;

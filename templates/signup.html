@@ -2,8 +2,20 @@
 
         {% block content %}
 
+        {% if error %}
+        <section id="loginmsg_container">
+            <div id="loginmsg">
+                <h1>{{message}}</h1>
+                <i class="fa-solid fa-x" id="loginmsgcancel"></i>
+    
+            </div>
+            
+            
+        </section>
+        {% endif %}
 
     <section class="form-parent">
+        
         <form method="POST">
             {% csrf_token %}
             <div class="form-container">
@@ -26,6 +38,19 @@
         </form>
     </section>
 </body>
+
+
+<script>
+    let cancellogin=document.getElementById("loginmsgcancel");
+    let loginmsg_con=document.getElementById("loginmsg_container");
+
+    cancellogin.addEventListener("click",function(){
+        loginmsg_con.setAttribute("style","display:none");
+
+    });
+
+
+</script>
 </html>
 
 {% endblock %}

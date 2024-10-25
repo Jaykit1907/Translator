@@ -113,37 +113,82 @@ def speak(request):
     return render(request,'speak.html',{'language':language})
 
 
-def signup(request):
+# def signup(request):
     
-    try:
-        if request.method=="POST":
-            fname1=request.POST['fname']
-            lname1=request.POST['lname']
-            phone1=request.POST['phone']
-            email1=request.POST['email']
-            password1=request.POST['password']
-            hashed_password = hash_password(password1)
+#     try:
+#         if request.method=="POST":
+#             fname1=request.POST['fname']
+#             lname1=request.POST['lname']
+#             phone1=request.POST['phone']
+#             email1=request.POST['email']
+#             password1=request.POST['password']
+#             hashed_password = hash_password(password1)
 
         
-            connection=mysql.connector.connect(host='localhost',user='root',database='jaykit4',password='pass123')
+#             connection=mysql.connector.connect(host='localhost',user='root',database='jaykit4',password='pass123')
         
-            con=connection.cursor()
-            con.execute("insert into signup values (%s,%s,%s,%s,%s)",(fname1,lname1,phone1,email1,hashed_password))
-            connection.commit()
-            print("data inserted")
-            con.close()
-            # em=Signup(first_name=fname1,last_name=lname1,phone=phone1,email=email1,password=hashed_password)
-            # em.save()
-            return redirect("/login/")
+#             con=connection.cursor()
+#             con.execute("insert into signup values (%s,%s,%s,%s,%s)",(fname1,lname1,phone1,email1,hashed_password))
+#             connection.commit()
+#             print("data inserted")
+#             con.close()
+#             # em=Signup(first_name=fname1,last_name=lname1,phone=phone1,email=email1,password=hashed_password)
+#             # em.save()
+#             return redirect("/login/")
             
+        
+#     except Exception as e:
+#         print(e)
+#         print("except block executed")
+
+#     return render(request,'signup.html')
+
+
+
+# def hash_password(plain_text_password):
+#     salt = bcrypt.gensalt()
+#     hashed_password = bcrypt.hashpw(plain_text_password.encode('utf-8'), salt)
+#     return hashed_password
+
+def signup(request):
+    try:
+        if request.method == "POST":
+            fname1 = request.POST['fname']
+            lname1 = request.POST['lname']
+            phone1 = request.POST['phone']
+            email1 = request.POST['email']
+            password1 = request.POST['password']
+            hashed_password = hash_password(password1)
+            
+            # Connect to the database
+            connection = mysql.connector.connect(
+                host='localhost', user='root', database='jaykit4', password='pass123'
+            )
+            con = connection.cursor()
+
+            # Check if user already exists by email or phone
+            con.execute("SELECT * FROM signup WHERE email = %s OR phone = %s", (email1, phone1))
+            existing_user = con.fetchone()
+            
+            if existing_user:
+              
+                return render(request, 'signup.html',{"error":True ,"message":"user already exist"})  # Reload signup page with the error message
+            else:
+                # Insert new user if not already existing
+                con.execute("insert into signup values (%s,%s,%s,%s,%s)",(fname1,lname1,phone1,email1,hashed_password))
+                connection.commit()
+                print("data inserted")
+                con.close()
+            
+                return redirect("/login/")
+            
+            con.close()
         
     except Exception as e:
         print(e)
-        print("except block executed")
+        print("Except block executed")
 
-    return render(request,'signup.html')
-
-
+    return render(request, 'signup.html')
 
 def hash_password(plain_text_password):
     salt = bcrypt.gensalt()
@@ -213,6 +258,7 @@ import pytesseract
 from PIL import Image
 from io import BytesIO
 from googletrans import Translator,LANGUAGES
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
